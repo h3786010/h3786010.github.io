@@ -28,8 +28,8 @@
         var table = $('#example').DataTable({
         info: false,
         paging: false,
-        // scrollX: true,
-        fixedHeader: true,
+        scrollX: true,
+        // fixedHeader: true,
         fixedColumns: true,
         orderCellsTop: true,
         aoColumnDefs: [
@@ -115,12 +115,6 @@
                     }
                 });
         },
-    });
-
-    $('input').on('focus', function (e) {
-        $(this).blur(); 
-        e.preventDefault(); 
-    
     });
 
 });
