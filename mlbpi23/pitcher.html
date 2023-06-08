@@ -117,13 +117,12 @@
         },
     });
 
-        // Filter event handler
-        $( table.table().container() ).on( 'keyup', 'tfoot input', function () {
-        table
-            .column( $(this).data('index') )
-            .search( this.value )
-            .draw();
-    } );
+    $('input').on('focus', function (e) {
+        $(this).blur(); 
+        e.preventDefault(); 
+    
+    });
+
 });
 </script>
 </head>
