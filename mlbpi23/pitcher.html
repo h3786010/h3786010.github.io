@@ -120,7 +120,10 @@
     });
 
     let windowWidth = window.innerWidth;
+    let resize_cnt = 0;
     window.addEventListener('resize', function(event) {
+        resize_cnt++;
+        $('#resize_cnt').text(resize_cnt);
         if (window.innerWidth != windowWidth) {
             windowWidth = window.innerWidth;
             handleEvent();
@@ -131,6 +134,7 @@
 </script>
 </head>
 <body>
+    <div id="resize_cnt"></div>
     <table id="example" class="display nowrap" style="width:100%">
         <thead>
             <tr>
