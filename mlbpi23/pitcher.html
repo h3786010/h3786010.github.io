@@ -121,16 +121,26 @@
 
     let windowWidth = window.innerWidth;
     let resize_cnt = 0;
-    window.addEventListener('resize', function(event) {
-        resize_cnt++;
-        $('#resize_cnt').text(resize_cnt);
-        if (window.innerWidth != windowWidth) {
-            windowWidth = window.innerWidth;
-            handleEvent();
+    // window.addEventListener('resize', function(event) {
+    //     resize_cnt++;
+    //     $('#resize_cnt').text(resize_cnt);
+    //     if (window.innerWidth != windowWidth) {
+    //         windowWidth = window.innerWidth;
+    //         handleEvent();
+    //     }
+    // });
+
+    $(window).on('resize', function(e){
+        // If the current active element is a text input, we can assume the soft keyboard is visible.
+        if($(document.activeElement).attr('type') === 'text') {
+            // Logic for while keyboard is shown
+            e.preventDefault();
+        } else {
+            // Logic for while keyboard is hidden
         }
     });
-
 });
+
 </script>
 </head>
 <body>
