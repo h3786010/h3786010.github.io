@@ -79,7 +79,7 @@
 
                     switch (colIndex) {
                         case 0:
-                            if (mobileCheck()) {
+                            if (!mobileCheck()) {
                                 var input = $('<input type="text">')
                                     .appendTo($('#filters').find('td').eq(colIndex))
                                     .on('keydown', function (ev) {
