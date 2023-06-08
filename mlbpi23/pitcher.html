@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title>投手球種球速查詢</title>
 
 <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/fc-4.2.2/fh-3.3.2/datatables.min.css" rel="stylesheet"/>
@@ -117,20 +118,6 @@
                     }
                 });
         },
-    });
-
-    let windowWidth = window.innerWidth;
-    let resize_cnt = 0;
-    window.addEventListener('resize', function(event) {
-        resize_cnt++;
-        $('#resize_cnt').text(resize_cnt);
-        event.preventDefault();
-        // if (window.innerWidth != windowWidth) {
-        //     windowWidth = window.innerWidth;
-        //     handleEvent();
-        // } else {
-        //     event.preventDefault();
-        // }
     });
 
 });
