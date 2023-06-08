@@ -29,7 +29,7 @@
         info: false,
         paging: false,
         scrollX: true,
-        // fixedHeader: true,
+        fixedHeader: true,
         fixedColumns: true,
         orderCellsTop: true,
         aoColumnDefs: [
@@ -79,16 +79,16 @@
 
                     switch (colIndex) {
                         case 0:
-                            var input = $('<input type="text">')
-                                .appendTo($('#filters').find('td').eq(colIndex))
-                                .on('keydown', function (ev) {
-                                    if (ev.keyCode == 13) { //only on enter keypress (code 13)
-                                        column
-                                            .search( this.value )
-                                            .draw();
-                                    }
-                                });
-                            break;
+                            // var input = $('<input type="text">')
+                            //     .appendTo($('#filters').find('td').eq(colIndex))
+                            //     .on('keydown', function (ev) {
+                            //         if (ev.keyCode == 13) { //only on enter keypress (code 13)
+                            //             column
+                            //                 .search( this.value )
+                            //                 .draw();
+                            //         }
+                            //     });
+                            // break;
                         case 1:
                         case 2:
                         case 3:
