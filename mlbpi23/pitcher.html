@@ -80,7 +80,7 @@
                         case 0:
                             var input = $('<input type="text">')
                                 .appendTo($('#filters').find('td').eq(colIndex))
-                                .on('change clear', function () {
+                                .on('change', function () {
                                     if (column.search() !== this.value) {
                                         column.search(this.value).draw();
                                     }
