@@ -82,9 +82,9 @@
                                 .appendTo($('#filters').find('td').eq(colIndex))
                                 .on('keydown', function (ev) {
                                     if (ev.keyCode == 13) {
-                                        if (column.search() !== this.value) {
-                                            column.search(this.value).draw();
-                                        }
+                                        column
+                                        .search( this.value )
+                                        .draw();
                                     }
                                 });
                             break;
