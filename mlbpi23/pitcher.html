@@ -80,9 +80,11 @@
                         case 0:
                             var input = $('<input type="text">')
                                 .appendTo($('#filters').find('td').eq(colIndex))
-                                .on('keyup', function () {
-                                    if (column.search() !== this.value) {
-                                        column.search(this.value).draw();
+                                .on('keydown', function (ev) {
+                                    if (ev.keyCode == 13) {
+                                        if (column.search() !== this.value) {
+                                            column.search(this.value).draw();
+                                        }
                                     }
                                 });
                             break;
