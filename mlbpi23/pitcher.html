@@ -76,21 +76,42 @@
                 .every(function (colIndex) {
                     var column = this;
 
-                    var select = $('<select><option value=""></option></select>')
-                        .appendTo($('#filters').find('td').eq(colIndex))
-                        .on('change', function () {
-                            var val = $.fn.dataTable.util.escapeRegex($(this).val());
- 
-                            column.search(val ? '^' + val + '$' : '', true, false).draw();
-                        });
- 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
-                        });
+                    switch (colIndex) {
+                        case 0:
+                            var input = $('<input type="text">')
+                                .appendTo($('#filters').find('td').eq(colIndex))
+                                .on('keyup change clear', function () {
+                                    if (column.search() !== this.value) {
+                                        column.search(this.value).draw();
+                                    }
+                                });
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
+                        case 5:
+                        case 6:
+                        case 15:
+                        case 16:
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($('#filters').find('td').eq(colIndex))
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+            
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                });
+                            break;
+                        default:
+                            break;
+                    }
                 });
         },
     });
