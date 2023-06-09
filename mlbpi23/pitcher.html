@@ -19,13 +19,21 @@
     }
     select, input {
         width: 100%;
+        border-width: 1px;
     }
-    .dataTables_scrollHead {
+    .sticky-element {
         position: sticky !important;
         top: 0 !important;
-        z-index: 20 !important;
         background-color: #fff !important;
         box-shadow: 0 1px 3px #00000017;
+        z-index: 20;
+    }
+    .dataTables_scrollHead {
+        /* position: sticky !important; */
+        /* top: 0 !important; */
+        /* z-index: 20 !important; */
+        /* background-color: #fff !important; */
+        /* box-shadow: 0 1px 3px #00000017; */
     }
     tr>th:first-child, tr>td:first-child {
         position: sticky !important;
@@ -52,7 +60,7 @@
         var table = $('#example').DataTable({
             info: false,
             paging: false,
-            scrollX: true,
+            // scrollX: true,
             // fixedHeader: true,
             // fixedColumns: true,
             orderCellsTop: true,
@@ -105,11 +113,9 @@
                                 // if (!mobileCheck()) {
                                     var input = $('<input type="text">')
                                         .appendTo($('#filters').find('td').eq(colIndex))
-                                        .on('keydown', function (ev) {
-                                            if (ev.keyCode == 13) { //only on enter keypress (code 13)
-                                                column
-                                                    .search( this.value )
-                                                    .draw();
+                                        .on('keyup change clear', function (ev) {
+                                            if (column.search() !== this.value) {
+                                                column.search(this.value).draw();
                                             }
                                         });
                                     break;
@@ -166,9 +172,9 @@ window.mobileCheck = function() {
 <body>
     <div id="resize_cnt"></div>
     <table id="example" class="display nowrap" style="width:100%">
-        <thead>
+        <thead class="sticky-element">
             <tr>
-                <th></th>
+                <th style="text-align: left;">Loading...</th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -233,9 +239,6 @@ window.mobileCheck = function() {
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>Loading...</th>
-            </tr>
         </tbody>
     </table> 
     <div style="text-align: center; margin: 10px 0;">- END -</div>
