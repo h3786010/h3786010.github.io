@@ -23,8 +23,15 @@
     .dataTables_scrollHead {
         position: sticky !important;
         top: 0 !important;
-        z-index: 99999 !important;
+        z-index: 20 !important;
         background-color: #fff !important;
+        box-shadow: 0 1px 3px #00000017;
+    }
+    tr>th:first-child, tr>td:first-child {
+        position: sticky !important;
+        left: 0;
+        z-index: 10;
+        background-color: #fff;
     }
  </style>
 <script>
@@ -36,7 +43,7 @@
         paging: false,
         scrollX: true,
         // fixedHeader: true,
-        fixedColumns: true,
+        // fixedColumns: true,
         orderCellsTop: true,
         aoColumnDefs: [
             {
@@ -88,9 +95,11 @@
                             // if (!mobileCheck()) {
                                 var input = $('<input type="text">')
                                     .appendTo($('#filters').find('td').eq(colIndex))
-                                    .on('keyup change clear', function (ev) {
-                                        if (column.search() !== this.value) {
-                                            column.search(this.value).draw();
+                                    .on('keydown', function (ev) {
+                                        if (ev.keyCode == 13) { //only on enter keypress (code 13)
+                                            column
+                                                .search( this.value )
+                                                .draw();
                                         }
                                     });
                                 break;
@@ -123,6 +132,15 @@
                     }
                 });
         },
+    });
+
+    $('input, select').on('change', function (e) {
+//            console.log(e.target, e.target.value)
+        if (e.target.value && !e.target.readOnly && !e.target.disabled) {
+            $(e.target).css('background-color', 'lightyellow');
+        } else {
+            $(e.target).css('background-color', '');
+        }
     });
 
 });
