@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0">
     <title>投手球種球速查詢</title>
 <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/fc-4.2.2/fh-3.3.2/datatables.min.css" rel="stylesheet"/>
  
@@ -19,7 +19,7 @@
     }
     select, input {
         width: 100%;
-        border-width: 1px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
     }
     .sticky-element {
         position: sticky !important;
@@ -167,6 +167,15 @@ window.mobileCheck = function() {
   return check;
 };
 
+// let parent = document.querySelector('.sticky-element').parentElement;
+
+// while (parent) {
+//     const hasOverflow = getComputedStyle(parent).overflow;
+//     if (hasOverflow !== 'visible') {
+//         console.log(hasOverflow, parent);
+//     }
+//     parent = parent.parentElement;
+// }
 </script>
 </head>
 <body>
