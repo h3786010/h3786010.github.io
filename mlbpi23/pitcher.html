@@ -111,9 +111,9 @@
                         switch (colIndex) {
                             case 0:
                                 // if (!mobileCheck()) {
-                                    var input = $('<input type="text">')
+                                    var input = $('<input type="text" name="filter_'+colIndex+'">')
                                         .appendTo($('#filters').find('td').eq(colIndex))
-                                        .on('keyup change clear', function (ev) {
+                                        .on('keyup change clear', function (e) {
                                             if (column.search() !== this.value) {
                                                 column.search(this.value).draw();
                                             }
@@ -128,7 +128,7 @@
                             case 6:
                             case 15:
                             case 16:
-                                var select = $('<select><option value=""></option></select>')
+                                var select = $('<select name="filter_'+colIndex+'">><option value=""></option></select>')
                                     .appendTo($('#filters').find('td').eq(colIndex))
                                     .on('change', function () {
                                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
