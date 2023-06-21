@@ -49,7 +49,7 @@
     var headers = [];
     var columns = [];
     var dataSet = [];
-    Papa.parse('data.csv?v=230621', {
+    Papa.parse('data.csv?v=230621a', {
         download: true,
         complete: function(results) {
             // console.log(results);
@@ -83,8 +83,8 @@
             orderCellsTop: true,
             columnDefs: [
                 { orderSequence: ['desc', 'asc'], targets: '_all' },
-                { type: namesType, targets: [4,33] },
-                { type: numbersType, targets: [17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] }
+                { type: namesType, targets: [4,31] },
+                { type: numbersType, targets: [17,18,19,20,21,22,23,24,25,26,27,28,29,30,32,33] }
             ],
             data: dataSet,
             columns: columns,
@@ -114,7 +114,7 @@
                             case 6:
                             case 15:
                             case 16:
-			    case 33:
+			    case 31:
                                 var select = $('<select name="filter_'+colIndex+'">><option value=""></option></select>')
                                     .appendTo($('#filters').find('td').eq(colIndex))
                                     .on('change', function () {
