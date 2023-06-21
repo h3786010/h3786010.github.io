@@ -7,8 +7,6 @@
     <title>投手球種球速查詢</title>
     <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
     <script src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.js"></script>
-    <script src="https://momentjs.com/downloads/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.13.4/sorting/datetime-moment.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.4/sorting/absolute.min.js"></script>
     <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
 <style>
@@ -67,8 +65,6 @@
     })
 
     function init() {
-
-	$.fn.dataTable.moment( 'YYYY/MM/DD' );
 	    
         var namesType = $.fn.dataTable.absoluteOrder([
 		    { value: '', position: 'bottom' }
