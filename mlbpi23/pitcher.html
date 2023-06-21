@@ -114,6 +114,7 @@
                             case 6:
                             case 15:
                             case 16:
+			    case 32:
                                 var select = $('<select name="filter_'+colIndex+'">><option value=""></option></select>')
                                     .appendTo($('#filters').find('td').eq(colIndex))
                                     .on('change', function () {
