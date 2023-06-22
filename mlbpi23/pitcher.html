@@ -49,7 +49,7 @@
     var headers = [];
     var columns = [];
     var dataSet = [];
-    Papa.parse('data.csv?v=230622a', {
+    Papa.parse('data.csv?v=230622b', {
         download: true,
         complete: function(results) {
             // console.log(results);
@@ -157,7 +157,7 @@
     <table id="example" class="display nowrap" style="width:100%">
         <thead class="sticky-element">
             <tr>
-                <th style="text-align: left;">Loading...</th>
+                <th style="text-align: center;"><img src="loader.gif"></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -231,6 +231,6 @@
         </thead>
         <tbody></tbody>
     </table> 
-    <div style="_text-align: center; margin: 10px 0;">- END -</div>
+    <div style="text-align: center; margin: 10px 0;">- END -</div>
 </body>
 </html>
