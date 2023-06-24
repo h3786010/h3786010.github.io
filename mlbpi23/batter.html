@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0">
+    <title>投手球種球速查詢</title>
+    <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
+    <script src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.13.4/sorting/absolute.min.js"></script>
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+    body {
+        font-family: monospace;
+        margin: 0;
+    }
+    #example_filter {
+        display: none;
+    }
+    select, input {
+        width: 100%;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-sizing: border-box;
+    }
+    .sticky-element {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        background-color: #fff !important;
+        box-shadow: 0 1px 3px #00000017;
+        z-index: 20;
+    }
+    tr>th:first-child, tr>td:first-child {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        left: 0;
+        z-index: 10;
+        background-color: #fff;
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .cell-border thead tr>th{
+	border-top: 1px solid rgba(0, 0, 0, 0.15);
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .cell-border thead tr>td{
+        border-right: 1px solid rgba(0, 0, 0, 0.15);
+    }
+ </style>
+<style>
+#loader{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('loader.gif') 50% 50% no-repeat #fff;
+}
+</style>
+<script>
+    var headers = [];
+    var columns = [];
+    var dataSet = [];
+    Papa.parse('batter.csv?v=230622b', {
+        download: true,
+        complete: function(results) {
+            // console.log(results);
+            headers = results.data.shift();
+            headers.forEach(text => {
+                columns.push({
+                    title: text
+                });
+            });
+            dataSet = results.data;
+            init();
+        }
+    })
+
+    function init() {
+	    
+        var namesType = $.fn.dataTable.absoluteOrder([
+		    { value: '', position: 'bottom' }
+		]);
+		
+        var numbersType = $.fn.dataTable.absoluteOrderNumber([
+            { value: '', position: 'bottom' }
+        ]);
+
+        // $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        //     // console.log(settings, data, dataIndex)
+        //     var filter_34 = $('[name="filter_34"]').val();
+        //     if (filter_34) {
+        //         if (data[34].indexOf(filter_34) > -1) return true; 
+        //         else if (data[35].indexOf(filter_34) > -1) return true; 
+        //         else if (data[36].indexOf(filter_34) > -1) return true; 
+        //     } else {
+        //         return true;
+        //     }
+        // });
+        
+        window.table = $('#example').DataTable({
+            info: false,
+            paging: false,
+            // scrollX: true,
+            // fixedHeader: true,
+            // fixedColumns: true,
+            // order: [[33, 'desc'],[0, 'asc']],
+            orderCellsTop: true,
+            columnDefs: [
+                { orderSequence: ['desc', 'asc'], targets: '_all' },
+                // { className: "group1", "targets": [34,35,36] },
+                // { className: "nosort", "targets": [34,35,36] },
+                // { orderable: false, targets: [3,4,6,15,16,34,35,36] },
+                { type: namesType, targets: [15,16,17,18,19,20,21] },
+                { type: numbersType, targets: [6,7,8,9,10,11,12,13,14] },
+            ],
+            data: dataSet,
+            columns: columns,
+            initComplete: function () {
+	    	    document.getElementById('loader').style.display='none';
+                this.api()
+                    .columns()
+                    .every(function (colIndex) {
+                        var column = this;
+
+                        switch (colIndex) {
+                            case 0:
+                                // if (!mobileCheck()) {
+                                    var input = $('<input type="text" name="filter_'+colIndex+'">')
+                                        .appendTo($('#filters').find('td').eq(colIndex))
+                                        .on('keyup change clear', function (e) {
+                                            if (column.search() !== this.value) {
+                                                column.search(this.value).draw();
+                                            }
+                                        });
+                                    break;
+                                // }
+                            case 1:
+                            case 2:
+                            case 3:
+                            case 4:
+                            case 5:
+                                var select = $('<select name="filter_'+colIndex+'">><option value=""></option></select>')
+                                    .appendTo($('#filters').find('td').eq(colIndex))
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                
+                                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                    });
+                                column
+                                    .data()
+                                    .unique()
+                                    .sort()
+                                    .each(function (d, j) {
+                                        if (d) {
+                                            select.append('<option value="' + d + '">' + d + '</option>');
+                                        }
+                                    });
+                                break;
+                            // case 34:
+                            // case 35:
+                            // case 36:
+                                // var select = $('<select name="filter_'+colIndex+'">><option value=""></option></select>')
+                                //     .appendTo($('#filters').find('td').eq(colIndex))
+                                //     .on('change', function () {
+                                //         table.draw();
+                                //     });
+                                // column
+                                //     .data()
+                                //     .unique()
+                                //     .sort()
+                                //     .each(function (d, j) {
+                                //         if (d) {
+                                //             select.append('<option value="' + d + '">' + d + '</option>');
+                                //         }
+                                //     });
+                                // break;
+                            default:
+                                break;
+                        }
+                    });
+            },
+        });
+    }
+
+    $(document).ready(function () {
+
+        $('body').on('change', 'input, select', function (e) {
+            // console.log(e.target, e.target.value)
+            if (e.target.value && !e.target.readOnly && !e.target.disabled) {
+                $(e.target).css('background-color', 'lightyellow');
+            } else {
+                $(e.target).css('background-color', '');
+            }
+        });
+
+    });
+
+</script>
+</head>
+<body>
+    <table id="example" class="display nowrap cell-border" style="width:100%">
+        <thead class="sticky-element">
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr id="filters">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+	    	    <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+<!-- 		<th style="text-align: center;"><img src="loader.gif"></th> -->
+	</tbody>
+    </table> 
+    <!-- <div style="text-align: center; margin: 10px 0;">- END -</div> -->
+    <div id="loader"></div>
+</body>
+</html>
