@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1.0">
-    <title>投手球種球速查詢</title>
+    <title>野手球種球速查詢</title>
     <link href="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
     <script src="https://cdn.datatables.net/v/dt/jq-3.6.0/dt-1.13.4/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.4/sorting/absolute.min.js"></script>
@@ -61,7 +61,7 @@
     var headers = [];
     var columns = [];
     var dataSet = [];
-    Papa.parse('batter.csv?v=230624a', {
+    Papa.parse('batter.csv?v=230625', {
         download: true,
         complete: function(results) {
             // console.log(results);
@@ -111,7 +111,7 @@
                 // { className: "group1", "targets": [34,35,36] },
                 // { className: "nosort", "targets": [34,35,36] },
                 // { orderable: false, targets: [3,4,6,15,16,34,35,36] },
-                { type: namesType, targets: [16,17,18,19,20,21,22] },
+                { type: namesType, targets: [16,17,18,19,20,21,22,23,24] },
                 { type: numbersType, targets: [6,7,8,9,10,11,12,13,14,15] },
             ],
             data: dataSet,
@@ -230,6 +230,8 @@
                 <th></th>
                 <th></th>
                 <th></th>
+		    <th></th>
+		    <th></th>
             </tr>
             <tr id="filters">
                 <td></td>
@@ -260,6 +262,8 @@
                 <td></td>
                 <td></td>
                 <td></td>
+		    <td></td>
+		    <td></td>
             </tr>
         </thead>
         <tbody>
