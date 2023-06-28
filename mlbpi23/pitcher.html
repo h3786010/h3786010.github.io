@@ -47,6 +47,41 @@
     }
  </style>
 <style>
+/* The navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: -webkit-sticky; /* Set the navbar to fixed position */
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  /* z-index: 9999; */
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change background on mouse-over */
+.navbar a:hover {
+  background: #ddd;
+  color: black;
+}
+.navbar .active {
+    color: yellow;
+}
+
+/* Main content */
+.main {
+  margin-top: 46px;
+}
+
 #loader{
   position: fixed;
   left: 0px;
@@ -203,6 +238,11 @@
 </script>
 </head>
 <body>
+    <div class="navbar">
+        <a href="pitcher.html" class="active">投手</a>
+        <a href="batter.html">野手</a>
+      </div>
+      <div class="main">
     <table id="example" class="display nowrap" style="width:100%">
         <thead class="sticky-element">
             <tr>
@@ -288,6 +328,7 @@
 <!-- 		<th style="text-align: center;"><img src="loader.gif"></th> -->
 	</tbody>
     </table> 
+    </div>
     <!-- <div style="text-align: center; margin: 10px 0;">- END -</div> -->
     <div id="loader"></div>
 </body>
