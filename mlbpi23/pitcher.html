@@ -96,7 +96,7 @@
     var headers = [];
     var columns = [];
     var dataSet = [];
-    Papa.parse('data.csv?v=230628', {
+    Papa.parse('data.csv?v=230712', {
         download: true,
         complete: function(results) {
             // console.log(results);
@@ -121,17 +121,17 @@
             { value: '', position: 'bottom' }
         ]);
 
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            // console.log(settings, data, dataIndex)
-            var filter_34 = $('[name="filter_34"]').val();
-            if (filter_34) {
-                if (data[34].indexOf(filter_34) > -1) return true; 
-                else if (data[35].indexOf(filter_34) > -1) return true; 
-                else if (data[36].indexOf(filter_34) > -1) return true; 
-            } else {
-                return true;
-            }
-        });
+        // $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        //     // console.log(settings, data, dataIndex)
+        //     var filter_34 = $('[name="filter_34"]').val();
+        //     if (filter_34) {
+        //         if (data[34].indexOf(filter_34) > -1) return true; 
+        //         else if (data[35].indexOf(filter_34) > -1) return true; 
+        //         else if (data[36].indexOf(filter_34) > -1) return true; 
+        //     } else {
+        //         return true;
+        //     }
+        // });
         
         window.table = $('#example').DataTable({
             info: false,
