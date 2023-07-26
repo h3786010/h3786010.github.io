@@ -96,7 +96,7 @@
     var headers = [];
     var columns = [];
     var dataSet = [];
-    Papa.parse('data.csv?v=230719', {
+    Papa.parse('data.csv?v=230726', {
         download: true,
         complete: function(results) {
             // console.log(results);
@@ -146,8 +146,8 @@
                 // { className: "group1", "targets": [34,35,36] },
                 // { className: "nosort", "targets": [34,35,36] },
                 // { orderable: false, targets: [3,4,6,15,16,34,35,36] },
-                { type: namesType, targets: [4,33] },
-                { type: numbersType, targets: [17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] },
+                { type: namesType, targets: [4,33,34] },
+                { type: numbersType, targets: [17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37] },
             ],
             data: dataSet,
             columns: columns,
@@ -276,10 +276,14 @@
                 <th></th>
                 <th></th>
                 <th></th>
-	    	    <th></th>
+	    	<th></th>
                 <th></th>
                 <th></th>
                 <th></th>
+	        <th></th>
+                <th></th>
+                <th></th>
+	        <th></th>
             </tr>
             <tr id="filters">
                 <td></td>
@@ -313,7 +317,11 @@
                 <td></td>
                 <td></td>
                 <td></td>
-	    	    <td></td>
+	    	<td></td>
+                <td></td>
+                <td></td>
+		<td></td>
+	    	<td></td>
                 <td></td>
                 <td></td>
             </tr>
