@@ -13,6 +13,7 @@
         await OneSignal.init({
           appId: "d05bc6c0-138a-4b4f-b0f9-b7ea01d40312",
         });
+		OneSignal.Notifications.requestPermission();
 		console.log(OneSignal.User.onesignalId);
       });
 	  
