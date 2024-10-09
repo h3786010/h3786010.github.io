@@ -1,7 +1,7 @@
 {   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
     "display": "standalone",
 	"start_url": "./",
-	"scope": ".",
+	"scope": "./",
     "name": "WebPush",
     "short_name": "WebPush"
 }
