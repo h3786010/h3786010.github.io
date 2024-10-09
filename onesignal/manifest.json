@@ -3,5 +3,5 @@
 	"start_url": "./",
 	"scope": ".",
     "name": "WebPush",
-    "short_name": "WebPush",
+    "short_name": "WebPush"
 }
