@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="manifest.json"/>
-    <title>Document</title>
+    <title>WebPush</title>
 </head>
 <body>
+	OneSignal ID:<br>
+	<span id="onesignal_id"></span>
+	Subscription ID:<br>
+	<span id="subscription_id"></span>
+	
 	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 	<script>
 	  window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -14,8 +19,8 @@
 		await OneSignal.init({
 		  appId: "d05bc6c0-138a-4b4f-b0f9-b7ea01d40312",
 		});
-		document.write('OneSignal ID:'+OneSignal.User.onesignalId)
-		document.write('Subscription ID:'+OneSignal.User.PushSubscription.id)
+		document.getElementById('onesignal_id').value = OneSignal.User.onesignalId;
+		document.getElementById('subscription_id').value = OneSignal.User.PushSubscription.id;
 	  });
 	</script>
 </body>
