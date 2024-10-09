@@ -19,8 +19,8 @@
 		await OneSignal.init({
 		  appId: "d05bc6c0-138a-4b4f-b0f9-b7ea01d40312",
 		});
-		document.getElementById('onesignal_id').value = OneSignal.User.onesignalId;
-		document.getElementById('subscription_id').value = OneSignal.User.PushSubscription.id;
+		document.getElementById('onesignal_id').innerText = OneSignal.User.onesignalId;
+		document.getElementById('subscription_id').innerText = OneSignal.User.PushSubscription.id;
 	  });
 	</script>
 </body>
