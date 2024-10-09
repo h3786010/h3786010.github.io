@@ -38,12 +38,6 @@
 		logOnScreen("OneSignal ID:"+OneSignal.User.onesignalId);
 		logOnScreen("Subscription ID:"+OneSignal.User.PushSubscription.id);
 	  });
-	  OneSignalDeferred.push(function() {
-		  OneSignal.User.addEventListener('change', function (event) {
-			logOnScreen(event)
-			console.log('change', { event });
-		  });
-		});
 	</script>
 	<script>
         // 自訂的 console.log 替代函數
