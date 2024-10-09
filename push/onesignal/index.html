@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json"/>
+    <title>WebPush</title>
+	<style>
+        #output {
+            /* 設定自動換行 */
+            white-space: pre-wrap; /* 保留空白和換行符號 */
+            word-wrap: break-word; /* 長字詞自動換行 */
+            width: 100%; /* 控制寬度，以便換行 */
+            background-color: #f0f0f0; /* 背景色以便於查看 */
+            padding: 10px; /* 增加一些內邊距 */
+            border: 1px solid #ccc; /* 增加邊框 */
+            max-height: 300px; /* 設定最大高度 */
+            overflow-y: auto; /* 內容超出時出現滾動條 */
+			box-sizing: border-box;
+        }
+		p {
+            margin: 5px 0; /* 控制訊息段落間距 */
+            font-family: monospace; /* 使用等寬字體顯示 */
+        }
+    </style>
+</head>
+<body>
+	
+	<div id="output"></div>
+	
+	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+	<script>
+	  window.OneSignalDeferred = window.OneSignalDeferred || [];
+	  OneSignalDeferred.push(async function(OneSignal) {
+		await OneSignal.init({
+		  appId: "d05bc6c0-138a-4b4f-b0f9-b7ea01d40312",
+		});
+		logOnScreen("OneSignal ID:"+OneSignal.User.onesignalId);
+		logOnScreen("Subscription ID:"+OneSignal.User.PushSubscription.id);
+	  });
+	</script>
+	<script>
+        // 自訂的 console.log 替代函數
+        function logOnScreen(message) {
+            // 顯示在畫面上，最新的訊息在最前面
+            const outputDiv = document.getElementById("output");
+            const newMessage = document.createElement("p");
+			
+            // 檢查是否為物件，並轉換為字串
+            if (typeof message === "object") {
+                try {
+                    message = JSON.stringify(message, null, 2); // 格式化為 JSON 字串
+                } catch (error) {
+                    message = "Unable to convert object to string.";
+                }
+            }
+			
+            newMessage.textContent = message;
+            outputDiv.prepend(newMessage);  // 將新訊息插入到最前面
+
+            // 同時在控制台顯示
+            console.log(message);
+        }
+    </script>
+</body>
+</html>
