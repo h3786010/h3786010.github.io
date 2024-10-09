@@ -16,8 +16,11 @@
             border: 1px solid #ccc; /* 增加邊框 */
             max-height: 300px; /* 設定最大高度 */
             overflow-y: auto; /* 內容超出時出現滾動條 */
-			font-family: monospace;
 			box-sizing: border-box;
+        }
+		p {
+            margin: 5px 0; /* 控制訊息段落間距 */
+            font-family: monospace; /* 使用等寬字體顯示 */
         }
     </style>
 </head>
@@ -35,6 +38,12 @@
 		logOnScreen("OneSignal ID:"+OneSignal.User.onesignalId);
 		logOnScreen("Subscription ID:"+OneSignal.User.PushSubscription.id);
 	  });
+	  OneSignalDeferred.push(function() {
+		  OneSignal.User.addEventListener('change', function (event) {
+			logOnScreen(event)
+			console.log('change', { event });
+		  });
+		});
 	</script>
 	<script>
         // 自訂的 console.log 替代函數
@@ -42,6 +51,16 @@
             // 顯示在畫面上，最新的訊息在最前面
             const outputDiv = document.getElementById("output");
             const newMessage = document.createElement("p");
+			
+            // 檢查是否為物件，並轉換為字串
+            if (typeof message === "object") {
+                try {
+                    message = JSON.stringify(message, null, 2); // 格式化為 JSON 字串
+                } catch (error) {
+                    message = "Unable to convert object to string.";
+                }
+            }
+			
             newMessage.textContent = message;
             outputDiv.prepend(newMessage);  // 將新訊息插入到最前面
 
