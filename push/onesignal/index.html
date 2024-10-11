@@ -50,10 +50,10 @@
 		
 		
 	  let permission = OneSignal.Notifications.permission;
-	  document.getElementById('bb').innerText = permission ? 'Yes' : 'No';
+	  document.getElementById('bb').innerText = permission === true ? 'Yes' : 'No';
 		
 	  let optedIn = OneSignal.User.PushSubscription.optedIn;
-	  document.getElementById('cc').innerText = optedIn ? 'Yes' : 'No';
+	  document.getElementById('cc').innerText = optedIn === true ? 'Yes' : 'No';
 		
 	  });
 	  
