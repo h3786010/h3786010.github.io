@@ -26,7 +26,6 @@
     </style>
 </head>
 <body>
-	<button id="btn-unsubscription">Unsubscription</button>
 	<div id="output"></div>
 	
 	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -52,11 +51,6 @@
 			//this is a good place to call OneSignal.login and pass in your user ID
 		  }
 		}
-		
-		
-		document.getElementById('btn-unsubscription').addEventListener("click", function() {
-		  OneSignal.removeExternalUserId();
-		});
 	</script>
 	<script>
         // 自訂的 console.log 替代函數
