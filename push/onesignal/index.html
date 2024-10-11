@@ -16,7 +16,6 @@
             border: 1px solid #ccc; /* 增加邊框 */
             /*max-height: 300px;  設定最大高度 */
             /*overflow-y: auto;  內容超出時出現滾動條 */
-		overflow-x: auto;
 			box-sizing: border-box;
         }
 		p {
@@ -26,12 +25,20 @@
     </style>
 </head>
 <body>
+	瀏覽器是否支援通知:<span id="aa"></span><br>
+	目前是否已允許通知:<span id="bb"></span><br>
+	目前訂閱狀態:<span id="cc"></span><br>
+	<hr>
 	<div id="output"></div>
 	
 	<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 	<script>
 	  window.OneSignalDeferred = window.OneSignalDeferred || [];
 	  OneSignalDeferred.push(async function(OneSignal) {
+	  let isSupported = OneSignal.Notifications.isPushSupported();
+	  document.getElementById('aa').innerText = isSupported ? 'Yes' : 'No';
+
+	  
 		await OneSignal.init({
 		  appId: "d05bc6c0-138a-4b4f-b0f9-b7ea01d40312",
 		});
@@ -39,6 +46,15 @@
 		logOnScreen("Subscription ID: "+OneSignal.User.PushSubscription.id);
 		
 		OneSignal.User.PushSubscription.addEventListener("change", pushSubscriptionChangeListener);
+		
+		
+		
+	  let permission = OneSignal.Notifications.permission;
+	  document.getElementById('bb').innerText = permission ? 'Yes' : 'No';
+		
+	  let optedIn = OneSignal.User.PushSubscription.optedIn;
+	  document.getElementById('cc').innerText = optedIn ? 'Yes' : 'No';
+		
 	  });
 	  
 	  
@@ -51,6 +67,11 @@
 			//this is a good place to call OneSignal.login and pass in your user ID
 		  }
 		}
+		
+		
+		document.getElementById('btn-unsubscription').addEventListener("click", function() {
+		  OneSignal.removeExternalUserId();
+		});
 	</script>
 	<script>
         // 自訂的 console.log 替代函數
