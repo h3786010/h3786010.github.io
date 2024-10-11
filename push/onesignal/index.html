@@ -36,7 +36,7 @@
 	  window.OneSignalDeferred = window.OneSignalDeferred || [];
 	  OneSignalDeferred.push(async function(OneSignal) {
 	  let isSupported = OneSignal.Notifications.isPushSupported();
-	  document.getElementById('aa').innerText = isSupported ? 'Yes' : 'No';
+	  document.getElementById('aa').innerText = isSupported === true ? 'Yes' : 'No';
 
 	  
 		await OneSignal.init({
